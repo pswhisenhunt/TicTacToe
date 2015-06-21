@@ -1,10 +1,10 @@
-function BoardView(board, el) {
+App.BoardView = function(board, el) {
   this.board = board;
   this.el = el;
   this._currentPlayer = PLAYER_X;
 };
 
-BoardView.prototype.render = function() {
+App.BoardView.prototype.render = function() {
   var template = [];
   var data = this.board.getCells();
   var templateCell = document.getElementById('template-board').innerHTML;
@@ -12,12 +12,12 @@ BoardView.prototype.render = function() {
   el.innerHTML = compiled({data: data});
 };
 
-BoardView.prototype.displayWinner = function() {
+App.BoardView.prototype.displayWinner = function() {
   var winner = document.getElementById('winner');
   winner.style.display = 'block';
 };
 
-BoardView.prototype.setCell = function(element) {
+App.BoardView.prototype.setCell = function(element) {
   if (!element.innerHTML) {
     var row = element.dataset.row;
     var column = element.dataset.column;
@@ -31,7 +31,7 @@ BoardView.prototype.setCell = function(element) {
   return;
 };
 
-BoardView.prototype.reset = function() {
+App.BoardView.prototype.reset = function() {
   var resetBtn = document.getElementsByClassName('reset')[0];
   var winner = document.getElementById('winner');
   var cells = this.board.getCells();
