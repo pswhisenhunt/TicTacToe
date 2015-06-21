@@ -7,14 +7,14 @@ function Board() {
 };
 
 Board.prototype.hasWinner = function() {
-  return this._getDownWinner() || this._getAcrossWinner() || this._getLeftDiagonalWinner() || this._getRightDiagonalWiner()
+  return this._getDownWinner() || this._getAcrossWinner() || this._getLeftDiagonalWinner() || this._getRightDiagonalWiner();
 };
 
 
 Board.prototype._getRightDiagonalWiner = function() {
+  var numberOfRows = this._cells.length-1;
   var isWinnerX = true;
   var isWinnerO = true;
-  var numberOfRows = this._cells.length-1;
   for (var i = 0; i <= numberOfRows; i++) {
     if (this._cells[i][numberOfRows - i] !== PLAYER_X) {
       isWinnerX = false;
@@ -23,7 +23,12 @@ Board.prototype._getRightDiagonalWiner = function() {
       isWinnerO = false;
     }
   }
-  return isWinnerX || isWinnerO;
+  if (isWinnerX) {
+    return true;
+  }
+  if (isWinnerO) {
+    return true;
+  }
 };
 
 Board.prototype._getLeftDiagonalWinner = function() {
@@ -37,7 +42,12 @@ Board.prototype._getLeftDiagonalWinner = function() {
       isWinnerO = false;
     }
   }
-  return isWinnerX || isWinnerO;
+  if (isWinnerX) {
+    return true;
+  }
+  if (isWinnerO) {
+    return true;
+  }
 };
 
 Board.prototype._getDownWinner = function() {
@@ -48,13 +58,18 @@ Board.prototype._getDownWinner = function() {
     isWinnerO = true;
     for (var j = 0; j <= this._cells[i].length-1; j++) {
       if (this._cells[j][i] !== PLAYER_X) {
-          isWinnerX = false;
+        isWinnerX = false;
       }
       if (this._cells[j][i] !== PLAYER_O) {
         isWinnerO = false;
       }
     }
-    return isWinnerX || isWinnerO;
+    if (isWinnerX) {
+      return true;
+    }
+    if (isWinnerO) {
+      return true;
+    }
   }
 };
 
@@ -73,7 +88,12 @@ Board.prototype._getAcrossWinner = function() {
         isWinnerO = false;
       }
     }
-  return isWinnerX || isWinnerO;
+    if (isWinnerX) {
+      return true;
+    }
+    if (isWinnerO) {
+      return true;
+    }
   }
 };
 
