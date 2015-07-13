@@ -1,3 +1,7 @@
-var App = {};
-var PLAYER_X = 'X';
-var PLAYER_O = 'O';
+
+var Contants = {
+  PLAYER_X: 'X',
+  PLAYER_O: 'O'
+}
+
+module.exports = Contants;

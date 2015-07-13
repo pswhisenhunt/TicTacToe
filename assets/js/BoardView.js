@@ -1,38 +1,54 @@
-App.BoardView = function(board, el) {
+var constants = require('./constants');
+
+var BoardView = function(board, el) {
   this.board = board;
   this.el = el;
-  this._currentPlayer = PLAYER_X;
+  this._currentPlayer = constants.PLAYER_X;
 };
 
-App.BoardView.prototype.render = function() {
+BoardView.prototype.render = function() {
   var template = [];
   var data = this.board.getCells();
   var templateCell = document.getElementById('template-board').innerHTML;
   var compiled = _.template(templateCell);
-  el.innerHTML = compiled({data: data});
+  this.el.innerHTML = compiled({data: data});
 };
 
-App.BoardView.prototype.displayWinner = function() {
+BoardView.prototype.displayWinner = function() {
   var winner = document.getElementById('winner');
   winner.style.display = 'block';
 };
 
-App.BoardView.prototype.setCell = function(element) {
+BoardView.prototype.bindClickEvents = function() {
+  var tableCells = document.getElementsByClassName('tcell');
+  var boardview = this;
+  for (var i = 0; i <= tableCells.length-1; i++) {
+    tableCells[i].addEventListener('click', function(event){
+      boardview.setCell(event.currentTarget);
+    });
+  };
+  var reset = document.getElementsByClassName('reset')[0];
+  reset.addEventListener('click', function() {
+    boardview.reset();
+  });
+};
+
+BoardView.prototype.setCell = function(element) {
   if (!element.innerHTML) {
     var row = element.dataset.row;
     var column = element.dataset.column;
     this.board.setCell(row, column, this._currentPlayer);
-    this._currentPlayer = this._currentPlayer === PLAYER_X ? PLAYER_O : PLAYER_X;
+    this._currentPlayer = this._currentPlayer === constants.PLAYER_X ? constants.PLAYER_O : constants.PLAYER_X;
     if (this.board.hasWinner()) {
       this.displayWinner();
     }
     this.render();
+    this.bindClickEvents();
   }
   return;
 };
 
-App.BoardView.prototype.reset = function() {
-  var resetBtn = document.getElementsByClassName('reset')[0];
+BoardView.prototype.reset = function() {
   var winner = document.getElementById('winner');
   var cells = this.board.getCells();
   for (var i = 0; i <= cells.length-1; i++) {
@@ -42,4 +58,7 @@ App.BoardView.prototype.reset = function() {
   }
   winner.style.display = 'none';
   this.render();
+  this.bindClickEvents();
 };
+
+module.exports = BoardView;

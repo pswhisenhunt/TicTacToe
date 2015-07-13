@@ -1,4 +1,8 @@
-var board = new App.Board();
-var el = document.getElementsByClassName('game')[0];
-var boardView = new App.BoardView(board, el);
+var Board = require('./Board');
+var BoardView = require('./BoardView');
+
+var board = new Board();
+var el = $('.game')[0];
+var boardView = new BoardView(board, el);
 boardView.render();
+boardView.bindClickEvents();
