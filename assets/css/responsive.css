@@ -1,0 +1,10 @@
+@media screen and (max-width: 600px) {
+  .tic-tac-toe-title {
+    font-size: 32px;
+    margin-left: 15%;
+  }
+
+  .reset {
+    font-size: 28px;
+  }
+}
