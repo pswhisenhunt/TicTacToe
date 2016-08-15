@@ -4,5 +4,3 @@ I built Tic Tac Toe right before I started learning Backbone.js. I designed it t
 
 I used Javascript, JQuery, Grunt, Browserify, Sass, Underscore.js, and Mocha to build this app.
 
-![tic-tac-toe](https://github.com/pswhisenhunt/TicTacToe/blob/master/tic-tac-toe-img/start.png)
-![tic-tac-toe](https://github.com/pswhisenhunt/TicTacToe/blob/master/tic-tac-toe-img/tic-tac-toe.png)
